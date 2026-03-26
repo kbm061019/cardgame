@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', 'Inter', var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --color-game-lime: #7CFF01;
+  --color-game-dark: #1A4D2E;
+  --color-game-bg: #F8F9FA;
+  --color-game-face: #F2EDE4;
+  --color-game-text: #1A1A1A;
+  --color-game-muted: #6B7280;
+
+  --shadow-premium: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.03);
+}
+
+:root {
+  --background: #F8F9FA;
+  --foreground: #1A1A1A;
+  --card: #F2EDE4;
+  --card-foreground: #1A1A1A;
+  --border: #E5E7EB;
+  --ring: rgba(124, 255, 1, 0.5);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  margin: 0;
+}
+
+.glass-card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: var(--shadow-glass);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.title-text {
+  font-size: 5rem;
+  line-height: 1;
+  font-weight: 800;
+  color: var(--color-game-dark);
+  letter-spacing: -0.05em;
+}
+
+.hero-tag {
+  background: var(--color-game-lime);
+  color: var(--color-game-dark);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Card Game Styles */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 24px;
+  background: #EBEBEB;
+  border-radius: 32px;
+}
+
+.scene {
+  perspective: 1000px;
+}
+
+.card-container {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card-container.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  font-size: 2.5rem;
+  transition: transform 0.2s;
+}
+
+.card-face:hover {
+  transform: scale(1.02);
+}
+
+.card-face-front {
+  background: var(--color-game-lime);
+  color: var(--color-game-dark);
+}
+
+.card-face-back {
+  background: var(--color-game-face);
+  transform: rotateY(180deg);
+  border: none;
+}
+
+.card-matched {
+  cursor: default;
+  pointer-events: none;
+}
+
+.card-matched .card-face-back {
+  background: #ECE0D1; /* Slightly different shade for matched */
+}
+
+.btn-start {
+  background: var(--color-game-dark);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-start:hover {
+  transform: scale(1.05);
+  background: #0D2B1A;
+}
+
+.input-name {
+  background: #E2E2E2;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  outline: none;
+  width: 200px;
+}
+
+.sidebar-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--color-game-muted);
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-game-dark);
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 16px;
+  background: #F2F2F2;
+}
+
+.leaderboard-item.rank-1 {
+  background: var(--color-game-lime);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
